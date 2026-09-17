@@ -39,7 +39,7 @@ export default function EventDetail() {
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch event:", error);
-        alert("Etkinlik detayları yüklenemedi");
+        alert("Failed to load event details");
         navigate(-1);
       }
     };
@@ -50,7 +50,7 @@ export default function EventDetail() {
   if (loading) {
     return (
       <div className="page-container">
-        <Typography>Yükleniyor...</Typography>
+        <Typography>Loading...</Typography>
       </div>
     );
   }
@@ -58,7 +58,7 @@ export default function EventDetail() {
   if (!event) {
     return (
       <div className="page-container">
-        <Typography>Etkinlik bulunamadı</Typography>
+        <Typography>Event not found</Typography>
       </div>
     );
   }
@@ -81,7 +81,7 @@ export default function EventDetail() {
         });
       }
     });
-    alert("Sepete eklendi!");
+    alert("Added to cart!");
   };
 
   const handleCheckout = async () => {
@@ -93,7 +93,7 @@ export default function EventDetail() {
       }));
 
     if (cartItems.length === 0) {
-      alert("Lütfen en az bir bilet seçin");
+      alert("Please select at least one ticket");
       return;
     }
 
@@ -113,14 +113,14 @@ export default function EventDetail() {
       }
 
       if (status === "PROCESSING") {
-        alert("Ödemeniz banka tarafından kontrol ediliyor. Sonuçlandığında e-posta ile bilgilendirileceksiniz.");
+        alert("Your payment is being reviewed by the bank. You will be notified by email once the review is complete.");
         return;
       }
 
       navigate("/checkout", { state: { clientSecret, orderId } });
     } catch (err) {
       console.error("Checkout error:", err);
-      alert(err.response?.data?.error || "Ödeme başlatılamadı, lütfen tekrar deneyin.");
+      alert(err.response?.data?.error || "Payment could not be initiated. Please try again.");
     } finally {
       setCheckoutLoading(false);
     }
@@ -130,7 +130,7 @@ export default function EventDetail() {
     <div className="page-container event-detail">
       <div className="event-detail__back">
         <Button variant="text" size="small" onClick={() => navigate(-1)}>
-          ← Geri
+          ← Back
         </Button>
       </div>
 
@@ -155,14 +155,14 @@ export default function EventDetail() {
             <span className="event-detail__meta-row">
               <CalendarMonthIcon fontSize="small" />
               <Typography variant="body2">
-                {new Date(event.startDate).toLocaleString("tr-TR", {
+                {new Date(event.startDate).toLocaleString("en-US", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
                   hour: "2-digit",
                   minute: "2-digit",
                 })}{" "}
-                - {new Date(event.endDate).toLocaleString("tr-TR", { hour: "2-digit", minute: "2-digit" })}
+                - {new Date(event.endDate).toLocaleString("en-US", { hour: "2-digit", minute: "2-digit" })}
               </Typography>
             </span>
 
@@ -173,17 +173,17 @@ export default function EventDetail() {
           </div>
 
           <Typography variant="body2" fontWeight="600">
-            Kapasite: {event.capacity} kişi
+            Capacity: {event.capacity} people
           </Typography>
 
           <div className="section">
             <Typography variant="h5" className="event-detail__section-title">
-              Bilet Tipleri
+              Ticket Types
             </Typography>
 
             {availableTicketTypes.length === 0 && (
               <Typography color="text.secondary">
-                Bu etkinlik için şu anda satışta bilet bulunmuyor.
+                There are currently no tickets available for this event.
               </Typography>
             )}
 
@@ -192,16 +192,16 @@ export default function EventDetail() {
                 <div className="ticket-type-card" key={ticketType.id}>
                   <Typography className="ticket-type-card__name">{ticketType.name}</Typography>
                   <Typography className="ticket-type-card__category">
-                    Kategori: {ticketType.category}
+                    Category: {ticketType.category}
                   </Typography>
                   <Typography className="ticket-type-card__price">{ticketType.price} ₺</Typography>
                   <Typography variant="caption" className="ticket-type-card__meta">
-                    {ticketType.totalCount - ticketType.soldCount} adet available
+                    {ticketType.totalCount - ticketType.soldCount} tickets available
                   </Typography>
                   <TextField
                     type="number"
                     size="small"
-                    label="Adet"
+                    label="Quantity"
                     fullWidth
                     value={quantities[ticketType.id] || 0}
                     onChange={(e) =>
@@ -219,10 +219,10 @@ export default function EventDetail() {
 
           <div className="event-detail__actions">
             <Button variant="outlined" size="large" onClick={handleAddToCart}>
-              Sepete Ekle
+              Add to Cart
             </Button>
             <Button variant="contained" size="large" disabled={checkoutLoading} onClick={handleCheckout}>
-              {checkoutLoading ? "Hazırlanıyor..." : "Ödemeye Geç"}
+              {checkoutLoading ? "Preparing..." : "Go to Payment Page"}
             </Button>
           </div>
         </div>

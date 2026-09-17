@@ -66,9 +66,9 @@ export default function MyCart() {
     return (
       <div className="centered-panel">
         <div className="centered-panel__card">
-          <Typography variant="h5" className="cart-page__empty">Sepetiniz Boş</Typography>
+          <Typography variant="h5" className="cart-page__empty">Your Cart is Empty</Typography>
           <Button variant="contained" onClick={() => navigate("/events")}>
-            Etkinliklere Dön
+            Back to events
           </Button>
         </div>
       </div>

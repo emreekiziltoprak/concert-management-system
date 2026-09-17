@@ -81,9 +81,6 @@ const Profile = () => {
         {sortedOrders.length === 0 ? (
           <div className="profile-page__empty">
             <Typography variant="body1">You haven't purchased any tickets yet.</Typography>
-            <Button variant="contained" color="primary" onClick={() => window.location.href = "/events"}>
-              Browse Events
-            </Button>
           </div>
         ) : (
           <div className="profile-page__orders">

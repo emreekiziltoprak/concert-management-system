@@ -77,7 +77,7 @@ export default function EventCard({ event, onEventUpdated, onEditClick }) {
             <DeleteIcon fontSize="small" />
           </IconButton>
           <Button size="small" variant="contained" onClick={handleDetailClick}>
-            Detay
+            Detail
           </Button>
         </div>
       </div>
