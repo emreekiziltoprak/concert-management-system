@@ -8,6 +8,7 @@ A full-stack concert/event management application built with Node.js/Express bac
 <img width="2048" height="1150" alt="e" src="https://github.com/user-attachments/assets/01538b90-26d1-457a-a68f-fb60b8645ce8" />
 <img width="2048" height="1165" alt="m" src="https://github.com/user-attachments/assets/fa1bd62a-fd7b-4a82-ac4e-83b94e62cede" />
 <img width="981" height="452" alt="t" src="https://github.com/user-attachments/assets/9dbb642d-87c5-4a61-b12b-dfc06c3860c2" />
+<img width="2048" height="1038" alt="n" src="https://github.com/user-attachments/assets/ca02e10a-6a16-4b22-b90f-16075ba5ce62" />
 
 ## Database Architecture (ERD)
 
